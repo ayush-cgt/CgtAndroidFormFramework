@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CgtAndroidFormFragment.iml" filepath="$PROJECT_DIR$/CgtAndroidFormFragment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CgtAndroidFormFramework.iml" filepath="$PROJECT_DIR$/CgtAndroidFormFramework.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
