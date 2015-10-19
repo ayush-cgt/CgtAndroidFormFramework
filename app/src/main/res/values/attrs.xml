@@ -7,7 +7,6 @@
 
     </declare-styleable>
 
-
     <!--<attr name="textPosition" format="enum">
         <enum name="left" value="0" />
         <enum name="right" value="1" />
