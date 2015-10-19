@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.cgt.android.form.framework.R;
@@ -50,6 +51,12 @@ public class CgtEditText extends EditText {
             propertyValue = a.getString(R.styleable.CgtView_validationMessage);
             if (propertyValue != null) {
                 setValidationMessage(propertyValue);
+            }
+
+            propertyValue = String.valueOf(a.getInt(R.styleable.CgtView_validationType, -1));
+
+            if (propertyValue != null) {
+                Log.d("propertyValue", propertyValue);
             }
 
             a.recycle();

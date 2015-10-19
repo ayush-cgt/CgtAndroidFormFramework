@@ -26,6 +26,7 @@
             android:singleLine="true"
             app:fontName="@string/font_SegoeWP_Light"
             app:serverParamKey="@string/key_first_name"
+            app:validationType="isEmpty|isValidEmail"
             app:validationMessage="@string/alert_firstname" />
 
     </android.support.design.widget.TextInputLayout>

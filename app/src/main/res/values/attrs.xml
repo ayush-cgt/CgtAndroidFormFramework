@@ -4,13 +4,15 @@
         <attr name="fontName" format="string" />
         <attr name="serverParamKey" format="string" />
         <attr name="validationMessage" format="string" />
+        <attr name="comparePassword" format="integer" />
+
+
+        <attr name="validationType" format="integer">
+            <flag name="isEmpty" value="1" />
+            <flag name="isValidEmail" value="2" />
+        </attr>
+
 
     </declare-styleable>
-
-    <!--<attr name="textPosition" format="enum">
-        <enum name="left" value="0" />
-        <enum name="right" value="1" />
-    </attr>-->
-
 
 </resources>
