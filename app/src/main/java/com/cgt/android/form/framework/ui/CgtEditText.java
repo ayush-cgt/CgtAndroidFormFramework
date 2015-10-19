@@ -72,11 +72,11 @@ public class CgtEditText extends EditText {
         this.validationMessage = validationMessage;
     }
 
-    public String getServerParamKey(String keyName) {
+    public String getServerParamKey() {
         return this.serverParamKey;
     }
 
-    public String getValidationMessage(String keyName) {
+    public String getValidationMessage() {
         return this.validationMessage;
     }
 
