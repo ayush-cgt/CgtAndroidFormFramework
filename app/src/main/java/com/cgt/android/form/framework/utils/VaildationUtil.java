@@ -1,4 +1,4 @@
-package com.cgt.android.form.framework.util;
+package com.cgt.android.form.framework.utils;
 
 import android.text.TextUtils;
 
