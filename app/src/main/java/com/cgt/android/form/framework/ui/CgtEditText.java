@@ -13,6 +13,9 @@ import com.cgt.android.form.framework.R;
  */
 public class CgtEditText extends EditText {
 
+    String serverParamKey = null;
+    String validationMessage = null;
+
 
     public CgtEditText(Context context) {
         super(context);
@@ -32,9 +35,21 @@ public class CgtEditText extends EditText {
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CgtView);
-            String propertyValue = a.getString(R.styleable.CgtView_fontName);
+
+            String propertyValue = null;
+            propertyValue = a.getString(R.styleable.CgtView_fontName);
             if (propertyValue != null) {
                 setFont(propertyValue);
+            }
+
+            propertyValue = a.getString(R.styleable.CgtView_serverParamKey);
+            if (propertyValue != null) {
+                setServerParamKey(propertyValue);
+            }
+
+            propertyValue = a.getString(R.styleable.CgtView_validationMessage);
+            if (propertyValue != null) {
+                setValidationMessage(propertyValue);
             }
 
             a.recycle();
@@ -47,7 +62,22 @@ public class CgtEditText extends EditText {
             Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontName);
             setTypeface(myTypeface);
         }
+    }
 
+    private void setServerParamKey(String keyName) {
+        this.serverParamKey = keyName;
+    }
+
+    private void setValidationMessage(String validationMessage) {
+        this.validationMessage = validationMessage;
+    }
+
+    public String getServerParamKey(String keyName) {
+        return this.serverParamKey;
+    }
+
+    public String getValidationMessage(String keyName) {
+        return this.validationMessage;
     }
 
 

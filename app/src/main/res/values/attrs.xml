@@ -2,11 +2,16 @@
 <resources>
     <declare-styleable name="CgtView">
         <attr name="fontName" format="string" />
-        <attr name="textPosition" format="enum">
-            <enum name="left" value="0" />
-            <enum name="right" value="1" />
-        </attr>
+        <attr name="serverParamKey" format="string" />
+        <attr name="validationMessage" format="string" />
+
     </declare-styleable>
+
+
+    <!--<attr name="textPosition" format="enum">
+        <enum name="left" value="0" />
+        <enum name="right" value="1" />
+    </attr>-->
 
 
 </resources>

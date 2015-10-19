@@ -7,7 +7,16 @@
     <string name="hintProfile">Enter Profile</string>
     <string name="hintAddress">Enter Address</string>
 
+    <!-- Server Key Names -->
+    <string name="key_first_name">first_name</string>
+    <string name="key_last_name">last_name</string>
+    <string name="key_profile">profile</string>
+    <string name="key_address">address</string>
 
+    <!-- Form Validations -->
+    <string name="alert_firstname">First Name should not be blank.</string>
+    <string name="alert_lastname">Last Name should not be blank.</string>
+    <string name="alert_profile">Profile should not be blank.</string>
 
     <!-- Font Names -->
     <string name="font_Arial_bd">arialbd.ttf</string>

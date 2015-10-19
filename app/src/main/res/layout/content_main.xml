@@ -24,7 +24,9 @@
             android:hint="@string/hintFirstName"
             android:maxLines="1"
             android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light" />
+            app:fontName="@string/font_SegoeWP_Light"
+            app:serverParamKey="@string/key_first_name"
+            app:validationMessage="@string/alert_firstname" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -39,7 +41,9 @@
             android:hint="@string/hintLastName"
             android:maxLines="1"
             android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light" />
+            app:fontName="@string/font_SegoeWP_Light"
+            app:serverParamKey="@string/key_last_name"
+            app:validationMessage="@string/alert_lastname" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -55,7 +59,9 @@
             android:hint="@string/hintProfile"
             android:maxLines="1"
             android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light" />
+            app:fontName="@string/font_SegoeWP_Light"
+            app:serverParamKey="@string/key_profile"
+            app:validationMessage="@string/alert_profile" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -68,9 +74,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintAddress"
-            android:maxLines="1"
+            android:maxLines="3"
             android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light" />
+            app:fontName="@string/font_SegoeWP_Light"
+            app:serverParamKey="@string/key_address" />
 
     </android.support.design.widget.TextInputLayout>
 
