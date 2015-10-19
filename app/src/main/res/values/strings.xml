@@ -7,4 +7,14 @@
     <string name="hintProfile">Enter Profile</string>
     <string name="hintAddress">Enter Address</string>
 
+
+
+    <!-- Font Names -->
+    <string name="font_Arial_bd">arialbd.ttf</string>
+    <string name="font_BadScript_Regular">BadScript-Regular.ttf</string>
+    <string name="font_Brush_script_mt_italic">brush-script-mt-italic.ttf</string>
+    <string name="font_SegoeWP_Black">SegoeWP-Black.ttf</string>
+    <string name="font_SegoeWP_Bold">SegoeWP-Bold.ttf</string>
+    <string name="font_SegoeWP_Light">SegoeWP-Light.ttf</string>
+
 </resources>

@@ -17,13 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <com.cgt.android.form.framework.ui.CgtEditText
             android:id="@+id/firstNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintFirstName"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            app:fontName="@string/font_SegoeWP_Light" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -31,13 +32,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <com.cgt.android.form.framework.ui.CgtEditText
             android:id="@+id/lastNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintLastName"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            app:fontName="@string/font_SegoeWP_Light" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -46,13 +48,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <com.cgt.android.form.framework.ui.CgtEditText
             android:id="@+id/profileEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintProfile"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            app:fontName="@string/font_SegoeWP_Light" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -60,13 +63,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <com.cgt.android.form.framework.ui.CgtEditText
             android:id="@+id/addressEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintAddress"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            app:fontName="@string/font_SegoeWP_Light" />
 
     </android.support.design.widget.TextInputLayout>
 
