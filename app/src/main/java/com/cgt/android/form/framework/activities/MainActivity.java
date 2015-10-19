@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.cgt.android.form.framework.R;
+import com.cgt.android.form.framework.utils.CommonUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,11 +29,17 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Okay", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                submitForm();
                             }
                         }).show();
             }
         });
+    }
+
+    private void submitForm() {
+        CommonUtil commonUtil = new CommonUtil(this);
+
+        commonUtil.submitFormData();
     }
 
     @Override
