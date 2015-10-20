@@ -25,8 +25,8 @@
             android:maxLines="1"
             android:singleLine="true"
             app:fontName="@string/font_SegoeWP_Light"
+            app:isCompulsory="true"
             app:serverParamKey="@string/key_first_name"
-            app:validationType="isEmpty|isValidEmail"
             app:validationMessage="@string/alert_firstname" />
 
     </android.support.design.widget.TextInputLayout>
@@ -43,6 +43,7 @@
             android:maxLines="1"
             android:singleLine="true"
             app:fontName="@string/font_SegoeWP_Light"
+            app:isCompulsory="true"
             app:serverParamKey="@string/key_last_name"
             app:validationMessage="@string/alert_lastname" />
 
@@ -61,6 +62,7 @@
             android:maxLines="1"
             android:singleLine="true"
             app:fontName="@string/font_SegoeWP_Light"
+            app:isCompulsory="true"
             app:serverParamKey="@string/key_profile"
             app:validationMessage="@string/alert_profile" />
 
@@ -78,6 +80,7 @@
             android:maxLines="3"
             android:singleLine="true"
             app:fontName="@string/font_SegoeWP_Light"
+            app:isCompulsory="false"
             app:serverParamKey="@string/key_address" />
 
     </android.support.design.widget.TextInputLayout>

@@ -4,14 +4,10 @@
         <attr name="fontName" format="string" />
         <attr name="serverParamKey" format="string" />
         <attr name="validationMessage" format="string" />
-        <attr name="comparePassword" format="integer" />
-
-
-        <attr name="validationType" format="integer">
-            <flag name="isEmpty" value="1" />
-            <flag name="isValidEmail" value="2" />
-        </attr>
-
+        <attr name="comparePassword" format="reference" />
+        <attr name="isCompulsory" format="boolean" />
+        <attr name="isEmail" format="boolean" />
+        <attr name="isPassword" format="boolean" />
 
     </declare-styleable>
 

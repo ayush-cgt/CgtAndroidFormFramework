@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.cgt.android.form.framework.R;
@@ -16,6 +15,10 @@ public class CgtEditText extends EditText {
 
     String serverParamKey = null;
     String validationMessage = null;
+    boolean isCompulsory = false;
+    boolean isEmail = false;
+    boolean isPassword = false;
+    int comparePassword = -1;
 
 
     public CgtEditText(Context context) {
@@ -38,6 +41,7 @@ public class CgtEditText extends EditText {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CgtView);
 
             String propertyValue = null;
+
             propertyValue = a.getString(R.styleable.CgtView_fontName);
             if (propertyValue != null) {
                 setFont(propertyValue);
@@ -53,11 +57,10 @@ public class CgtEditText extends EditText {
                 setValidationMessage(propertyValue);
             }
 
-            propertyValue = String.valueOf(a.getInt(R.styleable.CgtView_validationType, -1));
-
-            if (propertyValue != null) {
-                Log.d("propertyValue", propertyValue);
-            }
+            isCompulsory = a.getBoolean(R.styleable.CgtView_isCompulsory, false);
+            isEmail = a.getBoolean(R.styleable.CgtView_isEmail, false);
+            isPassword = a.getBoolean(R.styleable.CgtView_isPassword, false);
+            comparePassword = a.getResourceId(R.styleable.CgtView_comparePassword, -1);
 
             a.recycle();
         }
@@ -72,6 +75,7 @@ public class CgtEditText extends EditText {
     }
 
     private void setServerParamKey(String keyName) {
+
         this.serverParamKey = keyName;
     }
 
@@ -80,12 +84,28 @@ public class CgtEditText extends EditText {
     }
 
     public String getServerParamKey() {
+
         return this.serverParamKey;
     }
 
     public String getValidationMessage() {
+
         return this.validationMessage;
     }
 
+    public boolean isCompulsory() {
+        return isCompulsory;
+    }
 
+    public boolean isEmail() {
+        return isEmail;
+    }
+
+    public boolean isPassword() {
+        return isPassword;
+    }
+
+    public int getComparePassword() {
+        return comparePassword;
+    }
 }
