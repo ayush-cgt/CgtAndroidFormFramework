@@ -76,10 +76,13 @@ public class CommonUtil {
     public void submitFormData() {
         JSONObject jsonObject = new JSONObject();
         try {
+
             for (int i = 0; i < arrayViews.size(); i++) {
                 View view = arrayViews.get(i);
                 if (view instanceof CgtEditText) {
                     CgtEditText field = (CgtEditText) view;
+
+                    System.out.println("server_key >>" + field.getServerParamKey());
 
                     if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
                         if (field.isCompulsory()) { // is compulsory
@@ -126,12 +129,14 @@ public class CommonUtil {
                             if (field.getComparePassword() != -1) { // reference added
                                 CgtEditText fieldPsw = (CgtEditText) rootView.findViewById(field.getComparePassword());
                                 if (!VaildationUtil.isConfirmPasswordValid(field.getText().toString(), fieldPsw.getText().toString())) {
-                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_confirm_password), Toast.LENGTH_LONG).show();
                                     return;
                                 }
                             } else { // reference not added
-                                Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_compare_password_resource_missing), Toast.LENGTH_LONG).show();
-                                return;
+                                if (field.getServerParamKey().equals("nil")) {
+                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_compare_password_resource_missing), Toast.LENGTH_LONG).show();
+                                    return;
+                                }
                             }
                         }
                         jsonObject.put(field.getServerParamKey(), field.getText().toString());

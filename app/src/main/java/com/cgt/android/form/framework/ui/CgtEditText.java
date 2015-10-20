@@ -3,6 +3,7 @@ package com.cgt.android.form.framework.ui;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -61,6 +62,11 @@ public class CgtEditText extends EditText {
             isEmail = a.getBoolean(R.styleable.CgtView_isEmail, false);
             isPassword = a.getBoolean(R.styleable.CgtView_isPassword, false);
             comparePassword = a.getResourceId(R.styleable.CgtView_comparePassword, -1);
+
+            if (isPassword && TextUtils.isEmpty(getServerParamKey())) {
+                setServerParamKey("nil");
+            }
+
 
             a.recycle();
         }

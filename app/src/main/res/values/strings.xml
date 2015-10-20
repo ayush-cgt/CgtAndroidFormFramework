@@ -13,6 +13,8 @@
     <!-- Server Key Names -->
     <string name="key_first_name">first_name</string>
     <string name="key_last_name">last_name</string>
+    <string name="key_email">email</string>
+    <string name="key_password">password</string>
     <string name="key_profile">profile</string>
     <string name="key_address">address</string>
 
@@ -20,11 +22,14 @@
     <string name="alert_firstname">First Name should not be blank.</string>
     <string name="alert_lastname">Last Name should not be blank.</string>
     <string name="alert_profile">Profile should not be blank.</string>
+    <string name="alert_email">Email should not be blank.</string>
+    <string name="alert_password">Password should not be blank.</string>
 
     <!-- Generalised Validations -->
     <string name="alert_general_empty_field">Field(s) should not be blank.</string>
     <string name="alert_general_invalid_email">Invalid email.</string>
     <string name="alert_general_invalid_password">Invalid password. Password pattern is yet to added.</string>
+    <string name="alert_general_invalid_confirm_password">Password not matched. </string>
     <string name="alert_general_compare_password_resource_missing">Password Resource is missing.</string>
 
     <!-- Font Names -->
