@@ -18,6 +18,12 @@
     <string name="alert_lastname">Last Name should not be blank.</string>
     <string name="alert_profile">Profile should not be blank.</string>
 
+    <!-- Generalised Validations -->
+    <string name="alert_general_empty_field">Field(s) should not be blank.</string>
+    <string name="alert_general_invalid_email">Invalid email.</string>
+    <string name="alert_general_invalid_password">Invalid password. Password pattern is yet to added.</string>
+    <string name="alert_general_compare_password_resource_missing">Password Resource is missing.</string>
+
     <!-- Font Names -->
     <string name="font_Arial_bd">arialbd.ttf</string>
     <string name="font_BadScript_Regular">BadScript-Regular.ttf</string>
