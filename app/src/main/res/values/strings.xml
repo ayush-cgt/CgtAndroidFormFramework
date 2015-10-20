@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CgtAndroidFormFragment</string>
+    <string name="app_name">CgtAndroidFormFramework</string>
     <string name="action_settings">Settings</string>
 
     <string name="hintFirstName">Enter First Name</string>
@@ -42,7 +42,6 @@
 
     <!-- Server Interaction -->
     <string name="please_wait">Please wait..</string>
-
 
 
 </resources>

@@ -10,9 +10,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cgt.android.form.framework.R;
+import com.cgt.android.form.framework.interfaces.IOnGenericValidation;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.ui.CgtEditText;
-import com.cgt.android.form.framework.web.WebConstant;
 import com.cgt.android.form.framework.web.WebserviceTask;
 
 import org.json.JSONException;
@@ -69,7 +69,7 @@ public class CommonUtil {
         return result;
     }
 
-    public void submitFormData(IOnServerResponse serverResponseListener, String targetUrl) {
+    public void submitFormData(IOnGenericValidation onGenericValidation, IOnServerResponse serverResponseListener, String targetUrl) {
         JSONObject jsonObject = new JSONObject();
         try {
 
@@ -135,6 +135,13 @@ public class CommonUtil {
                                 }
                             }
                         }
+
+                        if (onGenericValidation != null) {
+                            if (!onGenericValidation.onGenricValidated()) {
+                                return;
+                            }
+                        }
+
                         if (!field.getServerParamKey().equals("nil"))
                             jsonObject.put(field.getServerParamKey(), field.getText().toString());
                     }

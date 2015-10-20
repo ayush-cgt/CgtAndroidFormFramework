@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
     }
 
     private void submitForm() {
+
         CommonUtil commonUtil = new CommonUtil(this);
-        commonUtil.submitFormData(this, WebConstant.WEB_SERVICE_PRE_URL);
+        commonUtil.submitFormData(null, this, WebConstant.WEB_SERVICE_PRE_URL);
     }
 
     @Override
