@@ -69,7 +69,7 @@ public class CommonUtil {
         return result;
     }
 
-    public void submitFormData(IOnServerResponse serverResponseListener) {
+    public void submitFormData(IOnServerResponse serverResponseListener, String targetUrl) {
         JSONObject jsonObject = new JSONObject();
         try {
 
@@ -142,7 +142,7 @@ public class CommonUtil {
             }
 
             System.out.println("Json >> " + jsonObject.toString());
-            interactServerToPostData(serverResponseListener, jsonObject.toString());
+            interactServerToPostData(serverResponseListener, jsonObject.toString(), targetUrl);
 
 
         } catch (JSONException e) {
@@ -152,9 +152,9 @@ public class CommonUtil {
         }
     }
 
-    void interactServerToPostData(IOnServerResponse serverResponseListener, String jsonText) {
+    void interactServerToPostData(IOnServerResponse serverResponseListener, String jsonText, String targetUrl) {
         if (serverResponseListener != null) {
-            WebserviceTask serverTask = new WebserviceTask(mActivity, WebConstant.WEB_SERVICE_PRE_URL, serverResponseListener);
+            WebserviceTask serverTask = new WebserviceTask(mActivity, targetUrl, serverResponseListener);
             serverTask.addPostJson(jsonText);
             serverTask.execute();
 

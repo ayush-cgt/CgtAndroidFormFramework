@@ -15,6 +15,7 @@ import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.models.Model;
 import com.cgt.android.form.framework.utils.CommonUtil;
+import com.cgt.android.form.framework.web.WebConstant;
 
 public class MainActivity extends AppCompatActivity implements IOnServerResponse {
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
 
     private void submitForm() {
         CommonUtil commonUtil = new CommonUtil(this);
-        commonUtil.submitFormData(this);
+        commonUtil.submitFormData(this, WebConstant.WEB_SERVICE_PRE_URL);
     }
 
     @Override
