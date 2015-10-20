@@ -4,6 +4,9 @@
 
     <string name="hintFirstName">Enter First Name</string>
     <string name="hintLastName">Enter Last Name</string>
+    <string name="hintEmail">Enter Email</string>
+    <string name="hintPassword">Enter Password</string>
+    <string name="hintConfirmPassword">Confirm Password</string>
     <string name="hintProfile">Enter Profile</string>
     <string name="hintAddress">Enter Address</string>
 

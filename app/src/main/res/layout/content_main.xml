@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,77 +12,142 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.cgt.android.form.framework.ui.CgtEditText
-            android:id="@+id/firstNameEditText"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintFirstName"
-            android:maxLines="1"
-            android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light"
-            app:isCompulsory="true"
-            app:serverParamKey="@string/key_first_name"
-            app:validationMessage="@string/alert_firstname" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.TextInputLayout>
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/firstNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintFirstName"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="true"
+                app:serverParamKey="@string/key_first_name"
+                app:validationMessage="@string/alert_firstname" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </android.support.design.widget.TextInputLayout>
 
-        <com.cgt.android.form.framework.ui.CgtEditText
-            android:id="@+id/lastNameEditText"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintLastName"
-            android:maxLines="1"
-            android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light"
-            app:isCompulsory="true"
-            app:serverParamKey="@string/key_last_name"
-            app:validationMessage="@string/alert_lastname" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.TextInputLayout>
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/lastNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintLastName"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="true"
+                app:serverParamKey="@string/key_last_name"
+                app:validationMessage="@string/alert_lastname" />
 
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.cgt.android.form.framework.ui.CgtEditText
-            android:id="@+id/profileEditText"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintProfile"
-            android:maxLines="1"
-            android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light"
-            app:isCompulsory="true"
-            app:serverParamKey="@string/key_profile"
-            app:validationMessage="@string/alert_profile" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.TextInputLayout>
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintEmail"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="true"
+                app:isEmail="true"
+                app:serverParamKey="@string/key_last_name"
+                app:validationMessage="@string/alert_lastname" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </android.support.design.widget.TextInputLayout>
 
-        <com.cgt.android.form.framework.ui.CgtEditText
-            android:id="@+id/addressEditText"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintAddress"
-            android:maxLines="3"
-            android:singleLine="true"
-            app:fontName="@string/font_SegoeWP_Light"
-            app:isCompulsory="false"
-            app:serverParamKey="@string/key_address" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.TextInputLayout>
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintPassword"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="true"
+                app:isPassword="true"
+                app:serverParamKey="@string/key_last_name"
+                app:validationMessage="@string/alert_lastname" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/confirmpasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintConfirmPassword"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="true"
+                app:isPassword="true"
+                app:serverParamKey="@string/key_last_name"
+                app:validationMessage="@string/alert_lastname" />
+
+        </android.support.design.widget.TextInputLayout>
 
 
-</LinearLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/profileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintProfile"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="true"
+                app:serverParamKey="@string/key_profile"
+                app:validationMessage="@string/alert_profile" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cgt.android.form.framework.ui.CgtEditText
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintAddress"
+                android:maxLines="3"
+                android:singleLine="true"
+                app:fontName="@string/font_SegoeWP_Light"
+                app:isCompulsory="false"
+                app:serverParamKey="@string/key_address" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+</ScrollView>
