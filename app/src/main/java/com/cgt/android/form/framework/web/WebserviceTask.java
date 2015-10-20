@@ -21,12 +21,14 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
 
 
     private boolean isSuccess = false;
+    private String Url;
     private String response;
     private String jsonText;
     private Model responseModel;
 
-    public WebserviceTask(Activity mActivity, IOnServerResponse serverResponseListener) {
+    public WebserviceTask(Activity mActivity, String Url, IOnServerResponse serverResponseListener) {
         this.mActivity = mActivity;
+        this.Url = Url;
         this.serverResponseListener = serverResponseListener;
     }
 
@@ -43,11 +45,12 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
         progressDialog.show();
     }
 
+    @Override
     protected String doInBackground(String... urls) {
         try {
             if (Utilities.checkNetworkConnection(mActivity)) {
 
-                ServerClient serverClient = new ServerClient(mActivity, WebConstant.WEB_SERVICE_PRE_URL);
+                ServerClient serverClient = new ServerClient(mActivity, Url);
                 response = serverClient.executePostRequest(jsonText);
                 isSuccess = serverClient.isSuccess();
 
@@ -55,7 +58,8 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
         } catch (Exception e) {
 
         }
-        return urls[0];
+
+        return response;
     }
 
     protected void onPostExecute(String result) {

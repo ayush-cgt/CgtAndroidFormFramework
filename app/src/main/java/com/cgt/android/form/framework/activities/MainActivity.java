@@ -5,9 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
@@ -15,6 +17,8 @@ import com.cgt.android.form.framework.models.Model;
 import com.cgt.android.form.framework.utils.CommonUtil;
 
 public class MainActivity extends AppCompatActivity implements IOnServerResponse {
+
+    String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +77,8 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
     @Override
     public void onServerFailure(Model responseData, String failureText) {
 
+        if (!TextUtils.isEmpty(failureText)) {
+            Toast.makeText(getApplicationContext(), failureText, Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.ui.CgtEditText;
+import com.cgt.android.form.framework.web.WebConstant;
 import com.cgt.android.form.framework.web.WebserviceTask;
 
 import org.json.JSONException;
@@ -153,7 +154,7 @@ public class CommonUtil {
 
     void interactServerToPostData(IOnServerResponse serverResponseListener, String jsonText) {
         if (serverResponseListener != null) {
-            WebserviceTask serverTask = new WebserviceTask(mActivity, serverResponseListener);
+            WebserviceTask serverTask = new WebserviceTask(mActivity, WebConstant.WEB_SERVICE_PRE_URL, serverResponseListener);
             serverTask.addPostJson(jsonText);
             serverTask.execute();
 
