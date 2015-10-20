@@ -85,9 +85,11 @@ public class CommonUtil {
                             if (TextUtils.isEmpty(field.getText().toString())) {
                                 if (!TextUtils.isEmpty(field.getValidationMessage())) {
                                     Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 } else {
                                     Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 }
                             }
@@ -97,13 +99,16 @@ public class CommonUtil {
                             if (TextUtils.isEmpty(field.getText().toString())) {
                                 if (!TextUtils.isEmpty(field.getValidationMessage())) {
                                     Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 } else {
                                     Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 }
                             } else if (!VaildationUtil.isEmailValid(field.getText().toString())) {
                                 Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_email), Toast.LENGTH_LONG).show();
+                                KeyboardUtil.showKeyboard(mActivity, field);
                                 return;
                             }
                         }
@@ -112,13 +117,16 @@ public class CommonUtil {
                             if (TextUtils.isEmpty(field.getText().toString())) {
                                 if (!TextUtils.isEmpty(field.getValidationMessage())) {
                                     Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 } else {
                                     Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 }
                             } else if (!VaildationUtil.isPasswordValid(field.getText().toString())) {
                                 Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_password), Toast.LENGTH_LONG).show();
+                                KeyboardUtil.showKeyboard(mActivity, field);
                                 return;
                             }
 
@@ -126,11 +134,13 @@ public class CommonUtil {
                                 CgtEditText fieldPsw = (CgtEditText) rootView.findViewById(field.getComparePassword());
                                 if (!VaildationUtil.isConfirmPasswordValid(field.getText().toString(), fieldPsw.getText().toString())) {
                                     Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_confirm_password), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 }
                             } else { // reference not added
                                 if (field.getServerParamKey().equals("nil")) {
                                     Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_compare_password_resource_missing), Toast.LENGTH_LONG).show();
+                                    KeyboardUtil.showKeyboard(mActivity, field);
                                     return;
                                 }
                             }
@@ -146,6 +156,10 @@ public class CommonUtil {
                             jsonObject.put(field.getServerParamKey(), field.getText().toString());
                     }
                 }
+            }
+
+            if (arrayViews.size()>0) {
+                KeyboardUtil.hideKeyboard(mActivity, arrayViews.get(0));
             }
 
             System.out.println("Json >> " + jsonObject.toString());
@@ -164,8 +178,6 @@ public class CommonUtil {
             WebserviceTask serverTask = new WebserviceTask(mActivity, targetUrl, serverResponseListener);
             serverTask.addPostJson(jsonText);
             serverTask.execute();
-
         }
-
     }
 }
