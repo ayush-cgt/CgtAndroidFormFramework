@@ -29,6 +29,8 @@ import java.util.ArrayList;
  */
 public class CommonUtil {
 
+    //private CommonListener listener;
+
     private Activity mActivity;
     ArrayList<View> arrayViews = new ArrayList<View>();
     private View rootView = null;
@@ -41,6 +43,11 @@ public class CommonUtil {
 
         Log.d("Views count", arrayViews.size() + "");
     }
+
+    // Assign the listener implementing events interface that will receive the events
+    /*public void setCommonListener(CommonListener listener) {
+        this.listener = listener;
+    }*/
 
     private ArrayList<View> getAllChildren(View v) {
 
@@ -139,11 +146,14 @@ public class CommonUtil {
                                 }
                             }
                         }
-                        jsonObject.put(field.getServerParamKey(), field.getText().toString());
+
+                        if (!field.getServerParamKey().equals("nil"))
+                            jsonObject.put(field.getServerParamKey(), field.getText().toString());
                     }
                 }
             }
-            new postAsync().execute(jsonObject.toString());
+            System.out.println("Json >> " + jsonObject.toString());
+            //new postAsync().execute(jsonObject.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -160,7 +170,7 @@ public class CommonUtil {
                     //String response = post("http://www.roundsapp.com/post", json);
                     response = post("https://raw.githubusercontent.com/square/okhttp/master/README.md", urls[0]);
                 } else {
-                    //listener.onError(mActivity.getString(R.string.error));
+                    //listener.onError(mActivity.getString(R.string.error_network));
                 }
             } catch (Exception e) {
 
@@ -172,7 +182,7 @@ public class CommonUtil {
                 /*try {
                     listener.onSuccess(new JSONObject(result));
                 } catch (JSONException e) {
-                    listener.onError(mActivity.getString(R.string.error));
+                    listener.onError(mActivity.getString(R.string.error_json_not_valid));
                 }*/
         }
     }
