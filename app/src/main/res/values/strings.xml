@@ -40,9 +40,9 @@
     <string name="font_SegoeWP_Bold">SegoeWP-Bold.ttf</string>
     <string name="font_SegoeWP_Light">SegoeWP-Light.ttf</string>
 
-    <!-- Error Messages -->
-    <string name="error_json_not_valid">Json is not valid.</string>
-    <string name="error_server">Server error.</string>
-    <string name="error_network">Please check network connection.</string>
+    <!-- Server Interaction -->
+    <string name="please_wait">Please wait..</string>
+
+
 
 </resources>

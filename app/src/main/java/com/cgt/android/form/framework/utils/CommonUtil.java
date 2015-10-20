@@ -1,7 +1,6 @@
 package com.cgt.android.form.framework.utils;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,25 +10,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cgt.android.form.framework.R;
+import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.ui.CgtEditText;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
+import com.cgt.android.form.framework.web.WebserviceTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by kst-android on 19/10/15.
  */
 public class CommonUtil {
-
-    //private CommonListener listener;
 
     private Activity mActivity;
     ArrayList<View> arrayViews = new ArrayList<View>();
@@ -43,11 +36,6 @@ public class CommonUtil {
 
         Log.d("Views count", arrayViews.size() + "");
     }
-
-    // Assign the listener implementing events interface that will receive the events
-    /*public void setCommonListener(CommonListener listener) {
-        this.listener = listener;
-    }*/
 
     private ArrayList<View> getAllChildren(View v) {
 
@@ -80,7 +68,7 @@ public class CommonUtil {
         return result;
     }
 
-    public void submitFormData() {
+    public void submitFormData(IOnServerResponse serverResponseListener) {
         JSONObject jsonObject = new JSONObject();
         try {
 
@@ -146,14 +134,16 @@ public class CommonUtil {
                                 }
                             }
                         }
-
                         if (!field.getServerParamKey().equals("nil"))
                             jsonObject.put(field.getServerParamKey(), field.getText().toString());
                     }
                 }
             }
+
             System.out.println("Json >> " + jsonObject.toString());
-            //new postAsync().execute(jsonObject.toString());
+            interactServerToPostData(serverResponseListener, jsonObject.toString());
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -161,47 +151,13 @@ public class CommonUtil {
         }
     }
 
-    private class postAsync extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... urls) {
-            String response = "";
-            try {
-                if (Utilities.checkNetworkConnection(mActivity)) {
-                    //String json = urls[0];
-                    //String response = post("http://www.roundsapp.com/post", json);
-                    response = post("https://raw.githubusercontent.com/square/okhttp/master/README.md", urls[0]);
-                } else {
-                    //listener.onError(mActivity.getString(R.string.error_network));
-                }
-            } catch (Exception e) {
+    void interactServerToPostData(IOnServerResponse serverResponseListener, String jsonText) {
+        if (serverResponseListener != null) {
+            WebserviceTask serverTask = new WebserviceTask(mActivity, serverResponseListener);
+            serverTask.addPostJson(jsonText);
+            serverTask.execute();
 
-            }
-            return urls[0];
         }
 
-        protected void onPostExecute(String result) {
-                /*try {
-                    listener.onSuccess(new JSONObject(result));
-                } catch (JSONException e) {
-                    listener.onError(mActivity.getString(R.string.error_json_not_valid));
-                }*/
-        }
-    }
-
-    private String post(String url, String json) {
-        try {
-            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-            OkHttpClient client = new OkHttpClient();
-
-            RequestBody body = RequestBody.create(JSON, json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        } catch (IOException e) {
-            return null;
-        }
     }
 }

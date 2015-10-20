@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.cgt.android.form.framework.R;
+import com.cgt.android.form.framework.interfaces.IOnServerResponse;
+import com.cgt.android.form.framework.models.Model;
 import com.cgt.android.form.framework.utils.CommonUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IOnServerResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void submitForm() {
         CommonUtil commonUtil = new CommonUtil(this);
-
-        commonUtil.submitFormData();
+        commonUtil.submitFormData(this);
     }
 
     @Override
@@ -62,5 +63,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onServerSuccess(Model responseData) {
+
+    }
+
+    @Override
+    public void onServerFailure(Model responseData, String failureText) {
+
     }
 }
