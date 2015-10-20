@@ -40,4 +40,9 @@
     <string name="font_SegoeWP_Bold">SegoeWP-Bold.ttf</string>
     <string name="font_SegoeWP_Light">SegoeWP-Light.ttf</string>
 
+    <!-- Server Interaction -->
+    <string name="please_wait">Please wait..</string>
+
+
+
 </resources>
