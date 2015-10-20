@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.ui.CgtEditText;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -30,11 +31,13 @@ public class CommonUtil {
 
     private Activity mActivity;
     ArrayList<View> arrayViews = new ArrayList<View>();
+    private View rootView = null;
 
     public CommonUtil(Activity activity) {
         this.mActivity = activity;
 
-        arrayViews = getAllChildren(this.mActivity.getWindow().getDecorView().getRootView());
+        rootView = this.mActivity.getWindow().getDecorView().getRootView();
+        arrayViews = getAllChildren(rootView);
 
         Log.d("Views count", arrayViews.size() + "");
     }
@@ -53,8 +56,7 @@ public class CommonUtil {
 
         if (vg instanceof Spinner) {
             result.add(vg);
-        }
-        else if (vg instanceof RadioGroup) {
+        } else if (vg instanceof RadioGroup) {
             result.add(vg);
         }
 
@@ -74,32 +76,72 @@ public class CommonUtil {
     public void submitFormData() {
         JSONObject jsonObject = new JSONObject();
         try {
-            for (int i = 0; i<arrayViews.size(); i ++) {
+            for (int i = 0; i < arrayViews.size(); i++) {
                 View view = arrayViews.get(i);
                 if (view instanceof CgtEditText) {
                     CgtEditText field = (CgtEditText) view;
 
-                    if(!TextUtils.isEmpty(field.getServerParamKey())) { // server key
-                        if (TextUtils.isEmpty(field.getText().toString())) { // text empty
-                            if (TextUtils.isEmpty(field.getValidationMessage())) { // validation message empty
-                                jsonObject.put(field.getServerParamKey(), field.getText().toString());
-                                break;
-                            } else { //
-                                Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        if (field.isCompulsory()) { // is compulsory
+                            if (TextUtils.isEmpty(field.getText().toString())) {
+                                if (!TextUtils.isEmpty(field.getValidationMessage())) {
+                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    return;
+                                } else {
+                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
+                                    return;
+                                }
                             }
                         }
+
+                        if (field.isEmail()) { // is valid email
+                            if (TextUtils.isEmpty(field.getText().toString())) {
+                                if (!TextUtils.isEmpty(field.getValidationMessage())) {
+                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    return;
+                                } else {
+                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                            } else if (!VaildationUtil.isEmailValid(field.getText().toString())) {
+                                Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_email), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
+
+                        if (field.isPassword()) { // is valid password
+                            if (TextUtils.isEmpty(field.getText().toString())) {
+                                if (!TextUtils.isEmpty(field.getValidationMessage())) {
+                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    return;
+                                } else {
+                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                            } else if (!VaildationUtil.isPasswordValid(field.getText().toString())) {
+                                Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_password), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+
+                            if (field.getComparePassword() != -1) { // reference added
+                                CgtEditText fieldPsw = (CgtEditText) rootView.findViewById(field.getComparePassword());
+                                if (!VaildationUtil.isConfirmPasswordValid(field.getText().toString(), fieldPsw.getText().toString())) {
+                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                            } else { // reference not added
+                                Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_compare_password_resource_missing), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
+                        jsonObject.put(field.getServerParamKey(), field.getText().toString());
                     }
                 }
             }
-
-
-
             new postAsync().execute(jsonObject.toString());
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -108,13 +150,11 @@ public class CommonUtil {
         protected String doInBackground(String... urls) {
             String response = "";
             try {
-                if(Utilities.checkNetworkConnection(mActivity))
-                {
+                if (Utilities.checkNetworkConnection(mActivity)) {
                     //String json = urls[0];
                     //String response = post("http://www.roundsapp.com/post", json);
                     response = post("https://raw.githubusercontent.com/square/okhttp/master/README.md", urls[0]);
-                }
-                else {
+                } else {
                     //listener.onError(mActivity.getString(R.string.error));
                 }
             } catch (Exception e) {
@@ -145,9 +185,8 @@ public class CommonUtil {
                     .build();
             Response response = client.newCall(request).execute();
             return response.body().string();
-        }
-        catch (IOException e) {
-            return  null;
+        } catch (IOException e) {
+            return null;
         }
     }
 }
