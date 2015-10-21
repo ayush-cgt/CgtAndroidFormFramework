@@ -120,7 +120,7 @@
             android:entries="@array/city_array"
             app:isCompulsory="true"
             app:serverParamKey="@string/key_city"
-            app:validationMessage="@string/alert_city"/>
+            app:validationMessage="@string/alert_city" />
 
 
         <android.support.design.widget.TextInputLayout

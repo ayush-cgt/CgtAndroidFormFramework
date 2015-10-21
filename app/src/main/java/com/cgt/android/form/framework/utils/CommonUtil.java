@@ -80,8 +80,6 @@ public class CommonUtil {
                 if (view instanceof CgtEditText) {
                     CgtEditText field = (CgtEditText) view;
 
-                    System.out.println("server_key >>" + field.getServerParamKey());
-
                     if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
                         if (field.isCompulsory()) { // is compulsory
                             if (TextUtils.isEmpty(field.getText().toString())) {
@@ -135,8 +133,6 @@ public class CommonUtil {
                 } else if (view instanceof CgtSpinner) {
                     CgtSpinner field = (CgtSpinner) view;
 
-                    System.out.println("server_key >>" + field.getServerParamKey());
-
                     if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
                         if (field.isCompulsory()) { // is compulsory
                             if (field.getSelectedItemPosition() == 0) {
@@ -145,13 +141,14 @@ public class CommonUtil {
                             }
                         }
 
-                        if (!field.getServerParamKey().equals("nil"))
+                        if (field.getSelectedItemPosition() != 0)
                             jsonObject.put(field.getServerParamKey(), field.getSelectedItem().toString());
+                        else
+                            jsonObject.put(field.getServerParamKey(), "");
+
                     }
                 } else if (view instanceof CgtRadioGroup) {
                     CgtRadioGroup field = (CgtRadioGroup) view;
-
-                    System.out.println("server_key >>" + field.getServerParamKey());
 
                     int radioButtonID = field.getCheckedRadioButtonId();
                     RadioButton radioButton = (RadioButton) field.findViewById(radioButtonID);
@@ -164,13 +161,16 @@ public class CommonUtil {
                             }
                         }
 
-                        if (radioButton != null && !field.getServerParamKey().equals("nil"))
+                        if (radioButton != null)
                             jsonObject.put(field.getServerParamKey(), radioButton.getText().toString());
+                        else {
+                            jsonObject.put(field.getServerParamKey(), "");
+                        }
                     }
                 }
             }
 
-            if (arrayViews.size()>0) {
+            if (arrayViews.size() > 0) {
                 KeyboardUtil.hideKeyboard(mActivity, arrayViews.get(0));
             }
 
