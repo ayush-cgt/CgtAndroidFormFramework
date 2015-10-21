@@ -9,10 +9,14 @@
     <string name="hintConfirmPassword">Confirm Password</string>
     <string name="hintProfile">Enter Profile</string>
     <string name="hintAddress">Enter Address</string>
+    <string name="hintMale">Male</string>
+    <string name="hintFemale">Female</string>
+    <string name="hintGender">Select Gender</string>
 
     <!-- Server Key Names -->
     <string name="key_first_name">first_name</string>
     <string name="key_last_name">last_name</string>
+    <string name="key_gender">gender</string>
     <string name="key_email">email</string>
     <string name="key_password">password</string>
     <string name="key_profile">profile</string>

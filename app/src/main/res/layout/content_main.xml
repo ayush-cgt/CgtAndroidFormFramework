@@ -28,6 +28,7 @@
                 android:hint="@string/hintFirstName"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="true"
                 app:serverParamKey="@string/key_first_name"
@@ -46,12 +47,49 @@
                 android:hint="@string/hintLastName"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="true"
                 app:serverParamKey="@string/key_last_name"
                 app:validationMessage="@string/alert_lastname" />
 
         </android.support.design.widget.TextInputLayout>
+
+        <com.cgt.android.form.framework.ui.CgtRadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:isCompulsory="true"
+            app:serverParamKey="@string/key_gender"
+            app:validationMessage="@string/alert_email">
+
+            <com.cgt.android.form.framework.ui.CgtTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="@string/hintGender"
+                android:textSize="@dimen/form_text_size"
+                app:fontName="@string/font_SegoeWP_Light" />
+
+            <com.cgt.android.form.framework.ui.CgtRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hintMale"
+                android:textSize="@dimen/form_text_size"
+                app:fontName="@string/font_SegoeWP_Light" />
+
+            <com.cgt.android.form.framework.ui.CgtRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hintFemale"
+                android:textSize="@dimen/form_text_size"
+                app:fontName="@string/font_SegoeWP_Light" />
+
+
+        </com.cgt.android.form.framework.ui.CgtRadioGroup>
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -65,6 +103,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="true"
                 app:isEmail="true"
@@ -85,6 +124,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="true"
                 app:isPassword="true"
@@ -105,6 +145,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:comparePassword="@+id/passwordEditText"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="true"
@@ -125,6 +166,7 @@
                 android:hint="@string/hintProfile"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="true"
                 app:serverParamKey="@string/key_profile"
@@ -143,6 +185,7 @@
                 android:hint="@string/hintAddress"
                 android:maxLines="3"
                 android:singleLine="true"
+                android:textSize="@dimen/form_text_size"
                 app:fontName="@string/font_SegoeWP_Light"
                 app:isCompulsory="false"
                 app:serverParamKey="@string/key_address" />
