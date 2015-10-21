@@ -67,7 +67,6 @@ public class CgtEditText extends EditText {
                 setServerParamKey("nil");
             }
 
-
             a.recycle();
         }
     }
