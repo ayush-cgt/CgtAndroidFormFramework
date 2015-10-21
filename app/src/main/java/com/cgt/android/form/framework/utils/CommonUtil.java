@@ -5,14 +5,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.interfaces.IOnGenericValidation;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.ui.CgtEditText;
+import com.cgt.android.form.framework.ui.CgtRadioGroup;
+import com.cgt.android.form.framework.ui.CgtSpinner;
 import com.cgt.android.form.framework.web.WebserviceTask;
 
 import org.json.JSONException;
@@ -50,9 +51,9 @@ public class CommonUtil {
 
         ViewGroup vg = (ViewGroup) v;
 
-        if (vg instanceof Spinner) {
+        if (vg instanceof CgtSpinner) {
             result.add(vg);
-        } else if (vg instanceof RadioGroup) {
+        } else if (vg instanceof CgtRadioGroup) {
             result.add(vg);
         }
 
@@ -131,6 +132,41 @@ public class CommonUtil {
                         if (!field.getServerParamKey().equals("nil"))
                             jsonObject.put(field.getServerParamKey(), field.getText().toString());
                     }
+                } else if (view instanceof CgtSpinner) {
+                    CgtSpinner field = (CgtSpinner) view;
+
+                    System.out.println("server_key >>" + field.getServerParamKey());
+
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        if (field.isCompulsory()) { // is compulsory
+                            if (field.getSelectedItemPosition() == 0) {
+                                displayNotEmptyMessage(field);
+                                return;
+                            }
+                        }
+
+                        if (!field.getServerParamKey().equals("nil"))
+                            jsonObject.put(field.getServerParamKey(), field.getSelectedItem().toString());
+                    }
+                } else if (view instanceof CgtRadioGroup) {
+                    CgtRadioGroup field = (CgtRadioGroup) view;
+
+                    System.out.println("server_key >>" + field.getServerParamKey());
+
+                    int radioButtonID = field.getCheckedRadioButtonId();
+                    RadioButton radioButton = (RadioButton) field.findViewById(radioButtonID);
+
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        if (field.isCompulsory()) { // is compulsory
+                            if (radioButton == null || TextUtils.isEmpty(radioButton.getText().toString())) {
+                                displayNotEmptyMessage(field);
+                                return;
+                            }
+                        }
+
+                        if (radioButton != null && !field.getServerParamKey().equals("nil"))
+                            jsonObject.put(field.getServerParamKey(), radioButton.getText().toString());
+                    }
                 }
             }
 
@@ -165,7 +201,33 @@ public class CommonUtil {
         }
     }
 
+    private void displayNotEmptyMessage(CgtSpinner field) {
+        if (!TextUtils.isEmpty(field.getValidationMessage())) {
+            displayMessage(field, field.getValidationMessage());
+        } else {
+            displayMessage(field, mActivity.getString(R.string.alert_general_empty_field));
+        }
+    }
+
+    private void displayNotEmptyMessage(CgtRadioGroup field) {
+        if (!TextUtils.isEmpty(field.getValidationMessage())) {
+            displayMessage(field, field.getValidationMessage());
+        } else {
+            displayMessage(field, mActivity.getString(R.string.alert_general_empty_field));
+        }
+    }
+
     private void displayMessage(CgtEditText field, String message) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+        KeyboardUtil.showKeyboard(mActivity, field);
+    }
+
+    private void displayMessage(CgtSpinner field, String message) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+        KeyboardUtil.showKeyboard(mActivity, field);
+    }
+
+    private void displayMessage(CgtRadioGroup field, String message) {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
         KeyboardUtil.showKeyboard(mActivity, field);
     }
