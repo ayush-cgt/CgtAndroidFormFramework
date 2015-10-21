@@ -75,6 +75,7 @@ public class CommonUtil {
 
             for (int i = 0; i < arrayViews.size(); i++) {
                 View view = arrayViews.get(i);
+
                 if (view instanceof CgtEditText) {
                     CgtEditText field = (CgtEditText) view;
 
@@ -83,64 +84,39 @@ public class CommonUtil {
                     if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
                         if (field.isCompulsory()) { // is compulsory
                             if (TextUtils.isEmpty(field.getText().toString())) {
-                                if (!TextUtils.isEmpty(field.getValidationMessage())) {
-                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
-                                    return;
-                                } else {
-                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
-                                    return;
-                                }
+                                displayNotEmptyMessage(field);
+                                return;
                             }
                         }
 
                         if (field.isEmail()) { // is valid email
                             if (TextUtils.isEmpty(field.getText().toString())) {
-                                if (!TextUtils.isEmpty(field.getValidationMessage())) {
-                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
-                                    return;
-                                } else {
-                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
-                                    return;
-                                }
+                                displayNotEmptyMessage(field);
+                                return;
                             } else if (!VaildationUtil.isEmailValid(field.getText().toString())) {
-                                Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_email), Toast.LENGTH_LONG).show();
-                                KeyboardUtil.showKeyboard(mActivity, field);
+                                displayMessage(field, mActivity.getString(R.string.alert_general_invalid_email));
                                 return;
                             }
                         }
 
                         if (field.isPassword()) { // is valid password
                             if (TextUtils.isEmpty(field.getText().toString())) {
-                                if (!TextUtils.isEmpty(field.getValidationMessage())) {
-                                    Toast.makeText(mActivity, field.getValidationMessage(), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
-                                    return;
-                                } else {
-                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_empty_field), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
-                                    return;
-                                }
+                                displayNotEmptyMessage(field);
+                                return;
                             } else if (!VaildationUtil.isPasswordValid(field.getText().toString())) {
-                                Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_password), Toast.LENGTH_LONG).show();
-                                KeyboardUtil.showKeyboard(mActivity, field);
+                                displayMessage(field, mActivity.getString(R.string.alert_general_invalid_password));
                                 return;
                             }
 
                             if (field.getComparePassword() != -1) { // reference added
                                 CgtEditText fieldPsw = (CgtEditText) rootView.findViewById(field.getComparePassword());
                                 if (!VaildationUtil.isConfirmPasswordValid(field.getText().toString(), fieldPsw.getText().toString())) {
-                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_invalid_confirm_password), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
+                                    displayMessage(field, mActivity.getString(R.string.alert_general_invalid_confirm_password));
                                     return;
                                 }
                             } else { // reference not added
                                 if (field.getServerParamKey().equals("nil")) {
-                                    Toast.makeText(mActivity, mActivity.getString(R.string.alert_general_compare_password_resource_missing), Toast.LENGTH_LONG).show();
-                                    KeyboardUtil.showKeyboard(mActivity, field);
+                                    displayMessage(field, mActivity.getString(R.string.alert_general_compare_password_resource_missing));
                                     return;
                                 }
                             }
@@ -179,5 +155,18 @@ public class CommonUtil {
             serverTask.addPostJson(jsonText);
             serverTask.execute();
         }
+    }
+
+    private void displayNotEmptyMessage(CgtEditText field) {
+        if (!TextUtils.isEmpty(field.getValidationMessage())) {
+            displayMessage(field, field.getValidationMessage());
+        } else {
+            displayMessage(field, mActivity.getString(R.string.alert_general_empty_field));
+        }
+    }
+
+    private void displayMessage(CgtEditText field, String message) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+        KeyboardUtil.showKeyboard(mActivity, field);
     }
 }
