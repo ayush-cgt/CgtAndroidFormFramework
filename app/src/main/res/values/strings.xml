@@ -18,6 +18,7 @@
     <string name="key_last_name">last_name</string>
     <string name="key_gender">gender</string>
     <string name="key_email">email</string>
+    <string name="key_city">city</string>
     <string name="key_password">password</string>
     <string name="key_profile">profile</string>
     <string name="key_address">address</string>
@@ -27,6 +28,8 @@
     <string name="alert_lastname">Last Name should not be blank.</string>
     <string name="alert_profile">Profile should not be blank.</string>
     <string name="alert_email">Email should not be blank.</string>
+    <string name="alert_city">City should not be blank.</string>
+    <string name="alert_gender">Gender should not be blank.</string>
     <string name="alert_password">Password should not be blank.</string>
 
     <!-- Generalised Validations -->

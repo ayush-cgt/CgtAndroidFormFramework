@@ -63,7 +63,7 @@
             android:orientation="horizontal"
             app:isCompulsory="true"
             app:serverParamKey="@string/key_gender"
-            app:validationMessage="@string/alert_email">
+            app:validationMessage="@string/alert_gender">
 
             <com.cgt.android.form.framework.ui.CgtTextView
                 android:layout_width="wrap_content"
@@ -118,7 +118,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:entries="@array/city_array"
-            android:prompt="@string/app_name" />
+            app:isCompulsory="true"
+            app:serverParamKey="@string/key_city"
+            app:validationMessage="@string/alert_city"/>
 
 
         <android.support.design.widget.TextInputLayout
