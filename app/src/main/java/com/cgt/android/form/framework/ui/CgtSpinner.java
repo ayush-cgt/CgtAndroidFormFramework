@@ -39,6 +39,8 @@ public class CgtSpinner extends Spinner {
 
             isCompulsory = a.getBoolean(R.styleable.CgtView_isCompulsory, false);
 
+            setPrompt("ayush");
+
             a.recycle();
         }
     }
