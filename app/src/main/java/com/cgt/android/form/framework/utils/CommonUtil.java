@@ -177,7 +177,6 @@ public class CommonUtil {
             System.out.println("Json >> " + jsonObject.toString());
             interactServerToPostData(serverResponseListener, jsonObject.toString(), targetUrl);
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -231,4 +230,5 @@ public class CommonUtil {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
         KeyboardUtil.showKeyboard(mActivity, field);
     }
+
 }
