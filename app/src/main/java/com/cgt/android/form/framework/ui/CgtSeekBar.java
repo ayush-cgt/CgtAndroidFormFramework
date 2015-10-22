@@ -17,6 +17,7 @@ public class CgtSeekBar extends SeekBar {
 
     public CgtSeekBar(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
 
     private void init(AttributeSet attrs) {

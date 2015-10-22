@@ -16,6 +16,7 @@ public class CgtRatingBar extends RatingBar {
 
     public CgtRatingBar(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
 
     private void init(AttributeSet attrs) {

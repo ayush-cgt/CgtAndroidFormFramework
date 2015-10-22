@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -13,7 +14,10 @@ import com.cgt.android.form.framework.interfaces.IOnGenericValidation;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.ui.CgtEditText;
 import com.cgt.android.form.framework.ui.CgtRadioGroup;
+import com.cgt.android.form.framework.ui.CgtRatingBar;
+import com.cgt.android.form.framework.ui.CgtSeekBar;
 import com.cgt.android.form.framework.ui.CgtSpinner;
+import com.cgt.android.form.framework.ui.CgtSwitch;
 import com.cgt.android.form.framework.web.WebserviceTask;
 
 import org.json.JSONException;
@@ -145,7 +149,6 @@ public class CommonUtil {
                             jsonObject.put(field.getServerParamKey(), field.getSelectedItem().toString());
                         else
                             jsonObject.put(field.getServerParamKey(), "");
-
                     }
                 } else if (view instanceof CgtRadioGroup) {
                     CgtRadioGroup field = (CgtRadioGroup) view;
@@ -167,6 +170,31 @@ public class CommonUtil {
                             jsonObject.put(field.getServerParamKey(), "");
                         }
                     }
+                } else if (view instanceof CgtSeekBar) {
+                    CgtSeekBar field = (CgtSeekBar) view;
+
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        jsonObject.put(field.getServerParamKey(), field.getProgress());
+                    }
+
+                } else if (view instanceof CgtRatingBar) {
+                    CgtRatingBar field = (CgtRatingBar) view;
+
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        jsonObject.put(field.getServerParamKey(), field.getRating());
+                    }
+                } else if (view instanceof CgtSwitch) {
+                    CgtSwitch field = (CgtSwitch) view;
+
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        jsonObject.put(field.getServerParamKey(), field.isChecked());
+                    }
+                } else if (view instanceof ImageView) {
+                    ImageView field = (ImageView) view;
+
+                    /*if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        jsonObject.put(field.getServerParamKey(), field.get);
+                    }*/
                 }
             }
 
