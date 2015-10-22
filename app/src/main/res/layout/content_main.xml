@@ -15,6 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="67dp"
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
@@ -184,6 +185,77 @@
                 app:validationMessage="@string/alert_profile" />
 
         </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.cgt.android.form.framework.ui.CgtTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hintRate"
+                android:textSize="@dimen/form_text_size"
+                app:fontName="@string/font_SegoeWP_Light" />
+
+
+            <com.cgt.android.form.framework.ui.CgtRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:serverParamKey="@string/key_rating" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.cgt.android.form.framework.ui.CgtTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="@string/hintNotifications"
+                android:textSize="@dimen/form_text_size"
+                app:fontName="@string/font_SegoeWP_Light" />
+
+            <com.cgt.android.form.framework.ui.CgtSwitch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form_text_size"
+                app:serverParamKey="@string/key_notifications" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.cgt.android.form.framework.ui.CgtTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/seekBarValueTextView"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="@string/hintSeekBar"
+                android:textSize="@dimen/form_text_size"
+                app:fontName="@string/font_SegoeWP_Light" />
+
+            <com.cgt.android.form.framework.ui.CgtSeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="10"
+                app:serverParamKey="@string/key_seekvalue" />
+
+        </LinearLayout>
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

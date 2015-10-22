@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cgt.android.form.framework.R;
@@ -21,6 +23,7 @@ import com.cgt.android.form.framework.web.WebConstant;
 public class MainActivity extends AppCompatActivity implements IOnServerResponse {
 
     String TAG = "MainActivity";
+    TextView seekBarValueTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        initViews();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +53,32 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
 
         CommonUtil commonUtil = new CommonUtil(this);
         commonUtil.submitFormData(null, this, WebConstant.WEB_SERVICE_PRE_URL);
+    }
+
+    void initViews() {
+        seekBarValueTextView = (TextView) findViewById(R.id.seekBarValueTextView);
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        seekBarValueTextView.setText(seekBar.getProgress() + "/" + seekBar.getMax());
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBarValueTextView.setText(progress + "/" + seekBar.getMax());
+            }
+        });
+
     }
 
     @Override

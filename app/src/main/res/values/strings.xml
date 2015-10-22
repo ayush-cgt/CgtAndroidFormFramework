@@ -12,6 +12,9 @@
     <string name="hintMale">Male</string>
     <string name="hintFemale">Female</string>
     <string name="hintGender">Select Gender</string>
+    <string name="hintRate">Rate yourself</string>
+    <string name="hintNotifications">Notifications</string>
+    <string name="hintSeekBar">0/10</string>
 
     <!-- Server Key Names -->
     <string name="key_first_name">first_name</string>
@@ -22,6 +25,9 @@
     <string name="key_password">password</string>
     <string name="key_profile">profile</string>
     <string name="key_address">address</string>
+    <string name="key_rating">rating</string>
+    <string name="key_notifications">notifications</string>
+    <string name="key_seekvalue">seek_value</string>
 
     <!-- Form Validations -->
     <string name="alert_firstname">First Name should not be blank.</string>
