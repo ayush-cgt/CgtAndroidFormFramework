@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
                 progress = progresValue;
+                seekBarValueTextView.setText(progress + "/" + seekBar.getMax());
             }
 
             @Override
