@@ -69,6 +69,7 @@
             <com.cgt.android.form.framework.ui.CgtTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="@string/hintGender"
                 android:textSize="@dimen/form_text_size"
@@ -203,9 +204,9 @@
 
             <com.cgt.android.form.framework.ui.CgtRatingBar
                 style="?android:attr/ratingBarStyleIndicator"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:isIndicator="false"
                 app:serverParamKey="@string/key_rating" />
 
