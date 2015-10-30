@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +19,14 @@ import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.models.Model;
 import com.cgt.android.form.framework.utils.CommonUtil;
-import com.cgt.android.form.framework.web.WebConstant;
 
 public class MainActivity extends AppCompatActivity implements IOnServerResponse {
 
     String TAG = "MainActivity";
     TextView seekBarValueTextView;
+    ImageView profileImageView;
+
+    CommonUtil commonUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        commonUtil = new CommonUtil(this);
 
         initViews();
 
@@ -51,8 +56,14 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
 
     private void submitForm() {
 
-        CommonUtil commonUtil = new CommonUtil(this);
-        commonUtil.submitFormData(null, this, WebConstant.WEB_SERVICE_PRE_URL);
+        //commonUtil.submitFormData(null, this, WebConstant.WEB_SERVICE_PRE_URL);
+
+        if (commonUtil.isValid(null)) {
+            commonUtil.postParseApiResponse(this, "FormData");
+            //commonUtil.postResponse(this, WebConstant.WEB_SERVICE_PRE_URL);
+            //commonUtil.getParseApiResponse(this, "FormData", "");
+            //commonUtil.getResponse(this, WebConstant.WEB_SERVICE_PRE_URL);
+        }
     }
 
     void initViews() {
@@ -80,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
             }
         });
 
+        profileImageView = (ImageView) findViewById(R.id.profileImageView);
+        commonUtil.displayImage("http://hdwgo.com/wp-content/uploads/2015/03/hd-buildings-picture.jpg", profileImageView,
+                R.mipmap.ic_launcher, R.mipmap.ic_launcher, 400, 600, 0);
     }
 
     @Override
@@ -109,14 +123,15 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
 
     @Override
     public void onServerSuccess(Model responseData) {
-
+        Toast.makeText(getApplicationContext(), "" + responseData.responseCode, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onServerFailure(Model responseData, String failureText) {
 
         if (!TextUtils.isEmpty(failureText)) {
-            Toast.makeText(getApplicationContext(), failureText, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), failureText, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "" + responseData.responseCode, Toast.LENGTH_LONG).show();
         }
     }
 }

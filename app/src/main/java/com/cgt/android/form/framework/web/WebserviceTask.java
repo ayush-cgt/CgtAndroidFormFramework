@@ -3,8 +3,10 @@ package com.cgt.android.form.framework.web;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import com.cgt.android.form.framework.R;
+import com.cgt.android.form.framework.configurations.ResponseCodes;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.models.Model;
 import com.cgt.android.form.framework.utils.Utilities;
@@ -49,11 +51,16 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... urls) {
         try {
             if (Utilities.checkNetworkConnection(mActivity)) {
-
                 ServerClient serverClient = new ServerClient(mActivity, Url);
-                response = serverClient.executePostRequest(jsonText);
-                isSuccess = serverClient.isSuccess();
 
+                if (!TextUtils.isEmpty(jsonText)) {
+                    response = serverClient.executePostRequest(jsonText);
+                }
+                else {
+                    response = serverClient.executeGetRequest();
+                }
+
+                isSuccess = serverClient.isSuccess();
             }
         } catch (Exception e) {
 
@@ -64,9 +71,14 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result) {
         progressDialog.dismiss();
+        responseModel = new Model();
         if (isSuccess) {
+            responseModel.responseCode = ResponseCodes.RESPONSE_SUCCESS;
+            responseModel.responseMessage = result;
             serverResponseListener.onServerSuccess(responseModel);
         } else {
+            responseModel.responseCode = ResponseCodes.RESPONSE_FAILURE;
+            responseModel.responseMessage = result;
             serverResponseListener.onServerFailure(responseModel, "Something went wrong!!");
         }
     }

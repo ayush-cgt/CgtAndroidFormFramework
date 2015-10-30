@@ -66,4 +66,9 @@
     </string-array>
 
 
+    <!-- Parse applicationId, clientKey -->
+    <string name="parseApplicationId">G8QwDtG57Lfd4WEpzAAISj8soXijy5NDouMWcQCy</string>
+    <string name="parseClientKey">HTisUdJexJHIabNbGDUZdw0WhuRSAvRZNYXvkdcB</string>
+
+
 </resources>
