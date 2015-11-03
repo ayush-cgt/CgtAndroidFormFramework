@@ -8,6 +8,7 @@
         <attr name="isCompulsory" format="boolean" />
         <attr name="isEmail" format="boolean" />
         <attr name="isPassword" format="boolean" />
+        <attr name="fileUri" format="string" />
 
     </declare-styleable>
 

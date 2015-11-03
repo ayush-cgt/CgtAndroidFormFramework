@@ -1,6 +1,7 @@
 package com.cgt.android.form.framework.utils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,10 +12,13 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.cgt.android.form.framework.R;
+import com.cgt.android.form.framework.configurations.PhotoConfig;
 import com.cgt.android.form.framework.imageloader.PicassoImageLoader;
 import com.cgt.android.form.framework.interfaces.IOnGenericValidation;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
+import com.cgt.android.form.framework.photo.PhotoHandler;
 import com.cgt.android.form.framework.ui.CgtEditText;
+import com.cgt.android.form.framework.ui.CgtImageView;
 import com.cgt.android.form.framework.ui.CgtRadioGroup;
 import com.cgt.android.form.framework.ui.CgtRatingBar;
 import com.cgt.android.form.framework.ui.CgtSeekBar;
@@ -40,8 +44,11 @@ public class CommonUtil {
     private String jsonObjectString = "";
     private HashMap<String, String> mapServerParam = new HashMap<String, String>();
 
+    PhotoHandler photoHandler;
+
     public CommonUtil(Activity activity) {
         this.mActivity = activity;
+        photoHandler = new PhotoHandler(mActivity);
 
         rootView = this.mActivity.getWindow().getDecorView().getRootView();
         arrayViews = getAllChildren(rootView);
@@ -472,6 +479,20 @@ public class CommonUtil {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void captureCameraImage(CgtImageView imageView) {
+        if (photoHandler.checkCameraHardware())
+            photoHandler.captureImage(imageView, PhotoConfig.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+    }
+
+    public void captureGalleryImage(CgtImageView imageView) {
+        if (photoHandler.checkCameraHardware())
+            photoHandler.captureImage(imageView, PhotoConfig.GALLERY_IMAGE_ACTIVITY_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        photoHandler.onActivityResult(requestCode, resultCode, data);
     }
 
     public void displayImage(String imageUrl, ImageView imageView) {

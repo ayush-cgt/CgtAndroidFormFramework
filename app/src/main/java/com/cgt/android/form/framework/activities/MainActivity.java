@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +17,14 @@ import android.widget.Toast;
 import com.cgt.android.form.framework.R;
 import com.cgt.android.form.framework.interfaces.IOnServerResponse;
 import com.cgt.android.form.framework.models.Model;
+import com.cgt.android.form.framework.ui.CgtImageView;
 import com.cgt.android.form.framework.utils.CommonUtil;
 
 public class MainActivity extends AppCompatActivity implements IOnServerResponse {
 
     String TAG = "MainActivity";
     TextView seekBarValueTextView;
-    ImageView profileImageView;
+    CgtImageView profileImageView;
 
     CommonUtil commonUtil;
 
@@ -91,9 +91,23 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
             }
         });
 
-        profileImageView = (ImageView) findViewById(R.id.profileImageView);
-        commonUtil.displayImage("http://hdwgo.com/wp-content/uploads/2015/03/hd-buildings-picture.jpg", profileImageView,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, 400, 600, 0);
+        profileImageView = (CgtImageView) findViewById(R.id.profileImageView);
+        /*commonUtil.displayImage("http://hdwgo.com/wp-content/uploads/2015/03/hd-buildings-picture.jpg", profileImageView,
+                R.mipmap.ic_launcher, R.mipmap.ic_launcher, 400, 600, 0);*/
+
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //commonUtil.captureCameraImage(profileImageView);
+                commonUtil.captureGalleryImage(profileImageView);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        commonUtil.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

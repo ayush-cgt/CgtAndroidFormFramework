@@ -281,12 +281,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="79dp" />
+            android:layout_height="30dp" />
 
-        <ImageView
+        <com.cgt.android.form.framework.ui.CgtImageView
             android:id="@+id/profileImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_camera"/>
 
     </LinearLayout>
 </ScrollView>
