@@ -13,6 +13,8 @@ import com.cgt.android.form.framework.R;
 public class CgtImageView extends ImageView {
 
     String serverParamKey = null;
+    String validationMessage = null;
+    boolean isCompulsory = false;
     String filePath = null;
 
     public CgtImageView(Context context, AttributeSet attrs) {
@@ -36,6 +38,13 @@ public class CgtImageView extends ImageView {
                 setFilePath(propertyValue);
             }
 
+            propertyValue = a.getString(R.styleable.CgtView_validationMessage);
+            if (propertyValue != null) {
+                setValidationMessage(propertyValue);
+            }
+
+            isCompulsory = a.getBoolean(R.styleable.CgtView_isCompulsory, false);
+
             a.recycle();
         }
     }
@@ -43,6 +52,10 @@ public class CgtImageView extends ImageView {
     private void setServerParamKey(String keyName) {
 
         this.serverParamKey = keyName;
+    }
+
+    private void setValidationMessage(String validationMessage) {
+        this.validationMessage = validationMessage;
     }
 
     public void setFilePath(String filePath) {
@@ -54,10 +67,20 @@ public class CgtImageView extends ImageView {
         return this.serverParamKey;
     }
 
+    public String getValidationMessage() {
+
+        return this.validationMessage;
+    }
+
     public String getFilePath() {
 
         return this.filePath;
     }
+
+    public boolean isCompulsory() {
+        return isCompulsory;
+    }
+
 
 }
 

@@ -2,13 +2,11 @@ package com.cgt.android.form.framework.photo;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -20,11 +18,10 @@ import android.widget.Toast;
 
 import com.cgt.android.form.framework.configurations.PhotoConfig;
 import com.cgt.android.form.framework.ui.CgtImageView;
+import com.cgt.android.form.framework.utils.MediaUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by kst-android on 2/11/15.
@@ -50,7 +47,7 @@ public class PhotoHandler {
                 // create Intent to take a picture and return control to the calling application
                 Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                fileUri = getOutputMediaFileUri(); // create a file to save the image
+                fileUri = MediaUtil.getOutputMediaFileUri(mContext); // create a file to save the image
                 in.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
                 // start the image capture Intent
@@ -100,7 +97,7 @@ public class PhotoHandler {
                         if (filePath != null)
                         {
                             String imgLink = filePath;
-                            bitmap = decodeFile(imgLink);
+                            bitmap = MediaUtil.decodeFile(imgLink);
 
                             mImageView.setImageBitmap(bitmap);
                             mImageView.setFilePath(filePath);
@@ -115,7 +112,7 @@ public class PhotoHandler {
                         Toast.makeText(mContext.getApplicationContext(), "Internal error", Toast.LENGTH_LONG).show();
                         Log.e(e.getClass().getName(), e.getMessage(), e);
                     }
-                } 
+                }
             }
             break;
             case PhotoConfig.GALLERY_IMAGE_ACTIVITY_REQUEST_CODE:
@@ -150,7 +147,7 @@ public class PhotoHandler {
                             if (filePath != null)
                             {
                                 String imgLink = filePath;
-                                bitmap = decodeFile(imgLink);
+                                bitmap = MediaUtil.decodeFile(imgLink);
 
                                 mImageView.setImageBitmap(bitmap);
                                 mImageView.setFilePath(filePath);
@@ -212,7 +209,7 @@ public class PhotoHandler {
                             if (filePath != null)
                             {
                                 String imgLink = filePath;
-                                bitmap = decodeFile(imgLink);
+                                bitmap = MediaUtil.decodeFile(imgLink);
 
                                 mImageView.setImageBitmap(bitmap);
                                 mImageView.setFilePath(filePath);
@@ -244,48 +241,6 @@ public class PhotoHandler {
             Toast.makeText(mContext.getApplicationContext(), "No camera on this device", Toast.LENGTH_LONG).show();
             return false;
         }
-    }
-
-    private Uri getOutputMediaFileUri() {
-        // give the image a name so we can store it in the phone's default location
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, "IMG_" + timeStamp + ".jpg");
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        Uri uri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values); // store content values
-        return uri;
-    }
-
-    public static Bitmap decodeFile(String filePath)
-    {
-        // Decode image size
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, o);
-
-        // The new size we want to scale to
-        final int REQUIRED_SIZE = 1024;
-
-        // Find the correct scale value. It should be the power of 2.
-        int width_tmp = o.outWidth, height_tmp = o.outHeight;
-        int scale = 1;
-        while (true)
-        {
-            if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
-                break;
-            width_tmp /= 2;
-            height_tmp /= 2;
-            scale *= 2;
-        }
-
-        // Decode with inSampleSize
-        BitmapFactory.Options o2 = new BitmapFactory.Options();
-        o2.inSampleSize = scale;
-        Bitmap bitmap = BitmapFactory.decodeFile(filePath, o2);
-        return bitmap;
     }
 
     @SuppressLint("NewApi")

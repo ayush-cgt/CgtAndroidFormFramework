@@ -26,6 +26,7 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
     private String Url;
     private String response;
     private String jsonText;
+    private String filePath;
     private Model responseModel;
 
     public WebserviceTask(Activity mActivity, String Url, IOnServerResponse serverResponseListener) {
@@ -38,6 +39,9 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
         this.jsonText = jsonText;
     }
 
+    public void addPostImagePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -53,10 +57,13 @@ public class WebserviceTask extends AsyncTask<String, Void, String> {
             if (Utilities.checkNetworkConnection(mActivity)) {
                 ServerClient serverClient = new ServerClient(mActivity, Url);
 
-                if (!TextUtils.isEmpty(jsonText)) {
+                if (!TextUtils.isEmpty(jsonText) && !TextUtils.isEmpty(filePath)) {
+                    response = serverClient.executePostMultiPartRequest(jsonText, filePath);
+                } else if (!TextUtils.isEmpty(jsonText)) {
                     response = serverClient.executePostRequest(jsonText);
-                }
-                else {
+                } else if (!TextUtils.isEmpty(filePath)) {
+                    response = serverClient.executePostMultiPartRequest(jsonText, filePath);
+                } else {
                     response = serverClient.executeGetRequest();
                 }
 

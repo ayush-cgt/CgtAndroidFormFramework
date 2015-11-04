@@ -288,7 +288,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
-            android:src="@android:drawable/ic_menu_camera"/>
+            android:src="@android:drawable/ic_menu_camera"
+            app:serverParamKey="@string/key_image"
+            app:isCompulsory="false" />
 
     </LinearLayout>
 </ScrollView>

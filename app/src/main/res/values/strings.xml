@@ -28,6 +28,7 @@
     <string name="key_rating">rating</string>
     <string name="key_notifications">notifications</string>
     <string name="key_seekvalue">seek_value</string>
+    <string name="key_image">image</string>
 
     <!-- Form Validations -->
     <string name="alert_firstname">First Name should not be blank.</string>

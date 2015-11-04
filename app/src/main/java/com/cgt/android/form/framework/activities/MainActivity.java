@@ -59,8 +59,10 @@ public class MainActivity extends AppCompatActivity implements IOnServerResponse
         //commonUtil.submitFormData(null, this, WebConstant.WEB_SERVICE_PRE_URL);
 
         if (commonUtil.isValid(null)) {
-            commonUtil.postParseApiResponse(this, "FormData");
+            //commonUtil.postParseApiResponse(this, "FormData");
+            commonUtil.postParseApiResponse(this, "FormJsonData");
             //commonUtil.postResponse(this, WebConstant.WEB_SERVICE_PRE_URL);
+            //commonUtil.postResponse(this, WebConstant.WEB_SERVICE_PRE_URL, profileImageView.getFilePath());
             //commonUtil.getParseApiResponse(this, "FormData", "");
             //commonUtil.getResponse(this, WebConstant.WEB_SERVICE_PRE_URL);
         }

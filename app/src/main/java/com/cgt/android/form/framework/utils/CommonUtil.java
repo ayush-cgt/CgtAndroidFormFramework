@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -30,6 +29,7 @@ import com.cgt.android.form.framework.web.WebserviceTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,6 +43,7 @@ public class CommonUtil {
     private View rootView = null;
     private String jsonObjectString = "";
     private HashMap<String, String> mapServerParam = new HashMap<String, String>();
+    private HashMap<String, File> mapServerFileParam = new HashMap<String, File>();
 
     PhotoHandler photoHandler;
 
@@ -349,12 +350,23 @@ public class CommonUtil {
                         jsonObject.put(field.getServerParamKey(), field.isChecked());
                         mapServerParam.put(field.getServerParamKey(), "" + field.isChecked());
                     }
-                } else if (view instanceof ImageView) {
-                    ImageView field = (ImageView) view;
+                } else if (view instanceof CgtImageView) {
+                    CgtImageView field = (CgtImageView) view;
 
-                    /*if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
-                        jsonObject.put(field.getServerParamKey(), field.get);
-                    }*/
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        if (field.isCompulsory()) { // is compulsory
+                            if (TextUtils.isEmpty(field.getFilePath())) {
+                                displayNotEmptyMessage(field);
+                                return false;
+                            }
+                        }
+
+                        //jsonObject.put(field.getServerParamKey(), field.getFilePath());
+                        //mapServerParam.put(field.getServerParamKey(), "" + field.getFilePath());
+                        if (!TextUtils.isEmpty(field.getFilePath())) {
+                            mapServerFileParam.put(field.getServerParamKey(), new File(field.getFilePath()));
+                        }
+                    }
                 }
             }
 
@@ -378,12 +390,25 @@ public class CommonUtil {
 
     public void postParseApiResponse(IOnServerResponse serverResponseListener, String tableName) {
         ParseClient parsePostTask = new ParseClient(mActivity, serverResponseListener);
-        //parsePostTask.postResponse(tableName, columnName, jsonObjectString);
-        parsePostTask.postResponse(tableName, mapServerParam);
+        parsePostTask.postResponse(tableName, jsonObjectString, mapServerFileParam);
+        //parsePostTask.postResponse(tableName, mapServerParam, mapServerFileParam);
     }
 
     public void postResponse(IOnServerResponse serverResponseListener, String targetUrl) {
-        interactServerToPostData(serverResponseListener, jsonObjectString, targetUrl);
+        if (serverResponseListener != null) {
+            WebserviceTask serverTask = new WebserviceTask(mActivity, targetUrl, serverResponseListener);
+            serverTask.addPostJson(jsonObjectString);
+            serverTask.execute();
+        }
+    }
+
+    public void postResponse(IOnServerResponse serverResponseListener, String targetUrl, String imagePath) {
+        if (serverResponseListener != null) {
+            WebserviceTask serverTask = new WebserviceTask(mActivity, targetUrl, serverResponseListener);
+            serverTask.addPostJson(jsonObjectString);
+            serverTask.addPostImagePath(imagePath);
+            serverTask.execute();
+        }
     }
 
     public void getParseApiResponse(IOnServerResponse serverResponseListener, String tableName, String whereClause) {
@@ -392,18 +417,6 @@ public class CommonUtil {
     }
 
     public void getResponse(IOnServerResponse serverResponseListener, String targetUrl) {
-        interactServerToGetData(serverResponseListener, targetUrl);
-    }
-
-    void interactServerToPostData(IOnServerResponse serverResponseListener, String jsonText, String targetUrl) {
-        if (serverResponseListener != null) {
-            WebserviceTask serverTask = new WebserviceTask(mActivity, targetUrl, serverResponseListener);
-            serverTask.addPostJson(jsonText);
-            serverTask.execute();
-        }
-    }
-
-    void interactServerToGetData(IOnServerResponse serverResponseListener, String targetUrl) {
         if (serverResponseListener != null) {
             WebserviceTask serverTask = new WebserviceTask(mActivity, targetUrl, serverResponseListener);
             serverTask.execute();
@@ -471,9 +484,16 @@ public class CommonUtil {
                             field.setChecked(Boolean.parseBoolean(jsonObject.getString(field.getServerParamKey())));
                         }
                     }
-                } else if (view instanceof ImageView) {
-                    ImageView field = (ImageView) view;
+                } else if (view instanceof CgtImageView) {
+                    CgtImageView field = (CgtImageView) view;
 
+                    if (!TextUtils.isEmpty(field.getServerParamKey())) { // check server key
+                        if (jsonObject.has(field.getServerParamKey())) {
+                            String imageUrl = jsonObject.getString(field.getServerParamKey());
+                            if(TextUtils.isEmpty(imageUrl))
+                                displayImage(imageUrl, field);
+                        }
+                    }
                 }
             }
         } catch (JSONException e) {
@@ -495,23 +515,23 @@ public class CommonUtil {
         photoHandler.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void displayImage(String imageUrl, ImageView imageView) {
+    public void displayImage(String imageUrl, CgtImageView imageView) {
         PicassoImageLoader.displayImage(mActivity, imageUrl, imageView);
     }
 
-    public void displayImage(String imageUrl, ImageView imageView, int defaultImageResId) {
+    public void displayImage(String imageUrl, CgtImageView imageView, int defaultImageResId) {
         PicassoImageLoader.displayImage(mActivity, imageUrl, imageView, defaultImageResId);
     }
 
-    public void displayImage(String imageUrl, ImageView imageView, int defaultImageResId, int errorImageResId) {
+    public void displayImage(String imageUrl, CgtImageView imageView, int defaultImageResId, int errorImageResId) {
         PicassoImageLoader.displayImage(mActivity, imageUrl, imageView, defaultImageResId, errorImageResId);
     }
 
-    public void displayImage(String imageUrl, ImageView imageView, int defaultImageResId, int errorImageResId, int imgWidth, int imgHeight) {
+    public void displayImage(String imageUrl, CgtImageView imageView, int defaultImageResId, int errorImageResId, int imgWidth, int imgHeight) {
         PicassoImageLoader.displayImage(mActivity, imageUrl, imageView, defaultImageResId, errorImageResId, imgWidth, imgHeight);
     }
 
-    public void displayImage(String imageUrl, ImageView imageView, int defaultImageResId, int errorImageResId, int imgWidth, int imgHeight, float rotation) {
+    public void displayImage(String imageUrl, CgtImageView imageView, int defaultImageResId, int errorImageResId, int imgWidth, int imgHeight, float rotation) {
         PicassoImageLoader.displayImage(mActivity, imageUrl, imageView, defaultImageResId, errorImageResId, imgWidth, imgHeight, rotation);
     }
 
@@ -540,6 +560,14 @@ public class CommonUtil {
         }
     }
 
+    private void displayNotEmptyMessage(CgtImageView field) {
+        if (!TextUtils.isEmpty(field.getValidationMessage())) {
+            displayMessage(field, field.getValidationMessage());
+        } else {
+            displayMessage(field, mActivity.getString(R.string.alert_general_empty_field));
+        }
+    }
+
     private void displayMessage(CgtEditText field, String message) {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
         KeyboardUtil.showKeyboard(mActivity, field);
@@ -551,6 +579,11 @@ public class CommonUtil {
     }
 
     private void displayMessage(CgtRadioGroup field, String message) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+        KeyboardUtil.showKeyboard(mActivity, field);
+    }
+
+    private void displayMessage(CgtImageView field, String message) {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
         KeyboardUtil.showKeyboard(mActivity, field);
     }
